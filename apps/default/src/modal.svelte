@@ -209,7 +209,7 @@
             </button>
           {:else}
             <button
-                    class="w-full bg-gray-400 text-white font-bold py-2 px-4 rounded cursor-not-allowed"
+                    class="w-full bg-neutral-400 dark:bg-neutral-700 text-white font-bold py-2 px-4 rounded cursor-not-allowed"
                     disabled
             >
               Connecting...
