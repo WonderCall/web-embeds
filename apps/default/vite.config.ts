@@ -10,4 +10,23 @@ export default defineConfig({
       }),
     }),
   ],
+  build: {
+    target: 'esnext',
+    lib: {
+      entry: 'src/entrypoint.ts',
+      name: 'WonderCall',
+      fileName: () => 'default.js',
+      formats: ['iife']
+    },
+    rollupOptions: {
+      output: {
+        extend: true,
+        inlineDynamicImports: true,
+      }
+    },
+    commonjsOptions: {
+      include: [/node_modules/],
+    },
+  },
+
 })
