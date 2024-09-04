@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.hover-border-accent{
+    @apply border border-transparent hover:border-[--accent-color] transition-[border-color] duration-300;
+}

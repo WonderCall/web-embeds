@@ -8,8 +8,9 @@
   import "./assets/main.css";
 
   interface WonderCallSettings {
-    primaryColor?: string;
-    secondaryColor?: string;
+    textColor?: string;
+    backgroundColor?: string;
+    accentColor?: string;
     modalTitle?: string;
     modalContent?: string;
     launchCallButtonText?: string;
@@ -21,8 +22,9 @@
   export let customSettings: WonderCallSettings;
 
   $: settings = {
-    primaryColor: '#3B82F6',
-    secondaryColor: '#EF4444',
+    textColor: null,
+    backgroundColor: null,
+    accentColor: "#646cff",
     modalTitle: 'Talk to WonderCall',
     modalContent: 'WonderCall is an AI Assistant you can talk to, just like a human!',
     launchCallButtonText: 'Start Call',
@@ -30,7 +32,6 @@
     assistantId: '140fe188-87f9-4df6-aa7d-0abe004ccbc7',
     ...customSettings
   };
-
 
   let isOpen = false;
   let callStatus: 'inactive' | 'loading' | 'active' = 'inactive';
@@ -55,8 +56,10 @@
 
     const style = document.createElement('style');
     style.textContent = `
-      .wondercall-btn-primary { background-color: ${settings.primaryColor}; }
-      .wondercall-btn-secondary { background-color: ${settings.secondaryColor}; }
+      ${settings.textColor && `.custom-text-color { color: ${settings.textColor} !important; }`}
+      ${settings.backgroundColor && `.custom-background-color { background: ${settings.backgroundColor} !important; }`}
+      ${settings.accentColor && `.custom-accent-bg { background: ${settings.accentColor} !important; }
+      `}
     `;
     shadowRoot.appendChild(style);
 
@@ -129,9 +132,9 @@
     content: '';
     position: absolute;
     inset: -1px;
-    background: linear-gradient(90deg, #4f46e5, #818cf8);
+    background: linear-gradient(90deg, var(--accent-color), var(--accent-color));
     opacity: min(calc(var(--wonder-volume) + var(--min-volume-border-opacity)), var(--max-volume-border-opacity));
-    box-shadow: 0 0 20px 20px  rgba(99, 102, 241, min(calc(var(--wonder-volume) * 0.7), var(--max-volume-glow-opacity)));
+    box-shadow: 0 0 20px 20px rgb(from var(--accent-color) r g b / calc(min(calc(var(--wonder-volume) * 0.7), var(--max-volume-glow-opacity)) * 100%));
     z-index: -1;
     transition: opacity 0.1s ease-in-out;
   }
@@ -142,11 +145,14 @@
 <svelte:options tag="wonder-call" />
 
 {#if shadowRoot}
-  <div class="fixed bottom-4 right-4 z-50 overflow-visible" style="--wonder-volume: {wonderVolume}; --max-volume-glow-opacity: {0.075}; --max-volume-border-opacity: {0.5}; --min-volume-border-opacity: {0}">
+  <div class="fixed bottom-4 right-4 z-50 overflow-visible custom-text-color"
+       style="--wonder-volume: {wonderVolume}; --max-volume-glow-opacity: {0.075}; --max-volume-border-opacity: {0.5}; --min-volume-border-opacity: {0};
+--accent-color: {settings.accentColor}
+">
     {#if !isOpen}
       <button
               on:click={toggleModal}
-              class="wonder-volume-border before:rounded-full wondercall-btn-primary absolute bottom-0 right-0 w-20 hover:shadow-2xl hover:shadow-indigo-600/20 hover:ring-indigo-600 hover:ring-1 text-white p-0 rounded-full font-bold object-cover"
+              class="wonder-volume-border before:rounded-full absolute bottom-0 right-0 w-20 hover:shadow-2xl hover:shadow-[--accent-color]/20 hover:ring-[--accent-color] hover:ring-1 text-white p-0 rounded-full font-bold object-cover"
       >
         <img
                 src="https://assets.wondercall.ai/img/mascot-wondercall-full.jpg"
@@ -198,7 +204,7 @@
           {#if callStatus === 'inactive'}
             <button
                     on:click={startCall}
-                    class="wondercall-btn-primary hover-border-indigo w-full dark:bg-neutral-800 bg-neutral-200 dark:text-white flex items-center justify-center text-white font-bold py-2 px-4 rounded"
+                    class="hover-border-accent w-full dark:bg-neutral-800 bg-neutral-200 dark:text-white flex items-center justify-center text-white font-bold py-2 px-4 rounded"
             >
               <Phone class="mr-2" size={20} />
               {settings.launchCallButtonText}
