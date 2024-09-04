@@ -5,19 +5,8 @@
   import { Phone, PhoneOff, X, Minimize2 } from 'lucide-svelte';
   import WonderCall from "../../../packages/web-sdk/wondercall";
   import Spinner from "./lib/Spinner.svelte";
-  import "./assets/main.css";
+  import type {WonderCallSettings} from "./entrypoint";
 
-  interface WonderCallSettings {
-    textColor?: string;
-    backgroundColor?: string;
-    accentColor?: string;
-    modalTitle?: string;
-    modalContent?: string;
-    launchCallButtonText?: string;
-    endCallButtonText?: string;
-    assistantId?: string;
-    apiPublicKey: string;
-  }
 
   export let customSettings: WonderCallSettings;
 

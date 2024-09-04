@@ -1,32 +1,48 @@
 import WonderCallComponent from './Modal.svelte';
+import styles from './assets/main.css?inline';
 
-interface WonderCallSettings {
-    primaryColor?: string;
-    secondaryColor?: string;
+export interface WonderCallSettings {
+    textColor?: string;
+    backgroundColor?: string;
+    accentColor?: string;
     modalTitle?: string;
     modalContent?: string;
     launchCallButtonText?: string;
     endCallButtonText?: string;
+    assistantId?: string;
+    apiPublicKey: string;
 }
 
 let instance: WonderCallComponent | null = null;
+let shadowRoot: ShadowRoot | null = null;
 
-function mount(config: WonderCallSettings = {}): WonderCallComponent | void {
+function mount(config: WonderCallSettings): WonderCallComponent | void {
     if (instance) {
         console.warn('WonderCall is already mounted. Call WonderCall.unmount() first.');
         return;
     }
 
+    const container = document.createElement('div');
+
+    shadowRoot = container.attachShadow({ mode: 'open' });
+
     const target = document.createElement('div');
-    document.body.appendChild(target);
+    shadowRoot.appendChild(target);
+
+    const style = document.createElement('style');
+    style.textContent = styles;
+    shadowRoot.appendChild(style);
+
+    document.body.appendChild(container);
 
     instance = new WonderCallComponent({
         target: target,
-        props: { passedSettings: config }
+        props: { customSettings: config }
     });
 
     return instance;
 }
+
 
 function unmount(): void {
     if (instance) {

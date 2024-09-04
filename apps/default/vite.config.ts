@@ -8,6 +8,7 @@ export default defineConfig({
       preprocess: sveltePreprocess({
         postcss: true,
       }),
+      emitCss: false
     }),
   ],
   build: {
