@@ -5,6 +5,7 @@
   import { Phone, PhoneOff, X, Minimize2 } from 'lucide-svelte';
   import WonderCall from "../../../packages/web-sdk/wondercall";
   import Spinner from "./lib/Spinner.svelte";
+  import "./assets/main.css";
 
   interface WonderCallSettings {
     primaryColor?: string;

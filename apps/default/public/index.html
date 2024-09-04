@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WonderCall Demo</title>
+</head>
+<body>
+<h1>WonderCall Demo</h1>
+<p>This page demonstrates loading and mounting WonderCall.</p>
+
+<script src="./default.js"></script>
+<link rel="stylesheet" href="./style.css"></link>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        if (window.WonderCall && typeof window.WonderCall.mount === 'function') {
+            window.WonderCall.mount();
+            console.log('WonderCall mounted successfully');
+        } else {
+            console.error('WonderCall not found or mount function not available');
+        }
+    });
+</script>
+</body>
+</html>
