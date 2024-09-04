@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WonderCall Embed Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+<body class="bg-neutral-800 text-white flex flex-col items-center justify-center p-8">
+<h1 class="text-4xl font-bold mb-4">WonderCall Demo</h1>
+<p class="mb-3">This page demonstrates loading and mounting WonderCall. All you need:</p>
+<pre class="text-sm font-mono max-w-2xl">
+&lt;script src=&quot;https://assets.wondercall.ai/embeds/default/latest/default.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+document.addEventListener(&#39;DOMContentLoaded&#39;, function() {
+    window.WonderCall.mount(
+    {
+        apiPublicKey: &quot;your-wondercall-api-key&quot;,
+        assistantId: &quot;your-assistant-id&quot;
+    });
+});
+&lt;/script&gt;
+</pre>
+
+
+
+<script src="./default.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        window.WonderCall.mount(
+                {
+                    apiPublicKey: "aa9eaca3-b360-46f2-a8c2-097a50b5b392",
+                    assistantId: "9b7dd079-9160-4805-9cbd-387df9dc3005"
+                }
+            );
+    });
+</script>
+</body>
+</html>
