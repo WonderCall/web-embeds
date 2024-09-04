@@ -1,4 +1,4 @@
-import WonderCallComponent from './Modal.svelte';
+import WonderCallComponent from './modal.svelte';
 import styles from './assets/main.css?inline';
 
 export interface WonderCallSettings {
