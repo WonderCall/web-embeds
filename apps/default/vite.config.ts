@@ -16,7 +16,7 @@ export default defineConfig({
     lib: {
       entry: 'src/entrypoint.ts',
       name: 'WonderCall',
-      fileName: () => 'default.js',
+      fileName: () => 'main.js',
       formats: ['iife']
     },
     rollupOptions: {
