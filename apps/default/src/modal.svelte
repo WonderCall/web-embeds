@@ -14,6 +14,8 @@
     modalContent?: string;
     launchCallButtonText?: string;
     endCallButtonText?: string;
+    assistantId?: string;
+    apiPublicKey: string;
   }
 
   export let customSettings: WonderCallSettings;
@@ -25,6 +27,7 @@
     modalContent: 'WonderCall is an AI Assistant you can talk to, just like a human!',
     launchCallButtonText: 'Start Call',
     endCallButtonText: 'End Call',
+    assistantId: '140fe188-87f9-4df6-aa7d-0abe004ccbc7',
     ...customSettings
   };
 
@@ -57,7 +60,7 @@
     `;
     shadowRoot.appendChild(style);
 
-    wonderCall = new WonderCall(import.meta.env.VITE_WONDERCALL_API_KEY);
+    wonderCall = new WonderCall(settings.apiPublicKey);
 
     wonderCall.on("call-start", () => {
       callStatus = 'active';
@@ -87,7 +90,7 @@
 
   async function startCall() {
     callStatus = 'loading';
-    await wonderCall.start("9b7dd079-9160-4805-9cbd-387df9dc3005");
+    await wonderCall.start(settings.assistantId);
     callTime = 0;
     intervalId = setInterval(() => {
       callTime += 1;
