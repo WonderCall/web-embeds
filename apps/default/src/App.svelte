@@ -1,5 +1,6 @@
 <script lang="ts">
   import Modal from './Modal.svelte';
+  import "./assets/main.css";
 </script>
 
 <main class="w-full min-h-screen bg-neutral-800 flex flex-col items-center justify-center">

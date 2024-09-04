@@ -39,9 +39,6 @@
     const customSettings = (window as any).wondercall || {};
     settings = { ...settings, ...customSettings };
 
-    host = document.createElement('div');
-    document.body.appendChild(host);
-    shadowRoot = host.attachShadow({ mode: 'open' });
 
     const style = document.createElement('style');
     style.textContent = `
@@ -50,7 +47,6 @@
       ${settings.accentColor && `.custom-accent-bg { background: ${settings.accentColor} !important; }
       `}
     `;
-    shadowRoot.appendChild(style);
 
     wonderCall = new WonderCall(settings.apiPublicKey);
 
@@ -131,17 +127,14 @@
 </style>
 
 
-<svelte:options tag="wonder-call" />
-
-{#if shadowRoot}
-  <div class="fixed bottom-4 right-4 z-50 overflow-visible custom-text-color"
+<div class="fixed bottom-4 right-4 z-50 overflow-visible custom-text-color"
        style="--wonder-volume: {wonderVolume}; --max-volume-glow-opacity: {0.075}; --max-volume-border-opacity: {0.5}; --min-volume-border-opacity: {0};
 --accent-color: {settings.accentColor}
 ">
     {#if !isOpen}
       <button
               on:click={toggleModal}
-              class="wonder-volume-border before:rounded-full absolute bottom-0 right-0 w-20 hover:shadow-2xl hover:shadow-[--accent-color]/20 hover:ring-[--accent-color] hover:ring-1 text-white p-0 rounded-full font-bold object-cover"
+              class="wonder-volume-border before:rounded-full absolute bottom-0 right-0 w-20 h-20 hover:shadow-2xl hover:shadow-[--accent-color]/20 hover:ring-[--accent-color] hover:ring-1 text-white p-0 rounded-full font-bold object-cover"
       >
         <img
                 src="https://assets.wondercall.ai/img/mascot-wondercall-full.jpg"
@@ -154,7 +147,7 @@
     {#if isOpen}
       <div
               transition:fly={{ y: 10, duration: 300, easing: cubicOut }}
-              class="wonder-volume-border before:rounded-lg before:-z-10 bg-white min-h-80 flex flex-col justify-between text-black dark:bg-neutral-950 dark:text-white rounded-lg shadow-xl p-6 w-80"
+              class="wonder-volume-border before:rounded-lg before:-z-10 bg-white min-h-80 flex flex-col justify-between text-black dark:bg-neutral-950 dark:text-white rounded-lg shadow-xl p-6 w-[90vw] md:w-80"
       >
         <button
                 style="--max-volume-glow-opacity: {0.2}; --max-volume-border-opacity: {1}; --min-volume-border-opacity: {0.3}"
@@ -217,5 +210,4 @@
         </div>
       </div>
     {/if}
-  </div>
-{/if}
+</div>
